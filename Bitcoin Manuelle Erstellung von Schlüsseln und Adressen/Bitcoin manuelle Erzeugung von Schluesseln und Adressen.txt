@@ -1,0 +1,84 @@
+﻿Bitcoin manuelle Erzeugung von Schluesseln und Adressen
+
+Schritt 1: Erzeugung eines Schluesselpaares
+Erzeugte Schluessel sind fuer das Bitcoin Test Network
+EC-Keypair:EC
+EC Private Key:Laenge: 64 Key:
+30 3E 02 01 00 30 10 06 07 2A 86 48 CE 3D 02 01 06 05 2B 81 04 00 0A 04 27 30 25 02 01 01 04 20 
+1C 25 19 05 CD E6 E4 CC D0 55 A0 0B 4D BB B2 C6 8C 7E DC BA 67 20 E1 54 93 12 82 4D C0 50 AC 2B 
+
+EC Public  Key:Laenge: 88 Key:
+30 56 30 10 06 07 2A 86 48 CE 3D 02 01 06 05 2B 81 04 00 0A 03 42 00 04 03 1E B7 65 C1 C1 B2 AA 
+CE 0A 8B D7 A8 C8 B3 56 43 14 95 E2 2D 3C E1 0A 72 3B 8A F5 0F 8A 5C DE 1E DF 46 60 3E 6A 8D 8F 
+FB 6F C5 B3 B4 06 46 3F 02 84 33 0D 10 AC 8D 94 51 D7 63 67 F2 81 90 01 
+EC Public  Key:Sun EC public key, 256 bits
+  public x coord: 1411209720634181744448765001188814275284149220389351390666392761381044247774
+  public y coord: 13963878069915922178897894831646609797119273110760406486775323411398048976897
+  parameters: secp256k1 (1.3.132.0.10)
+Der Private Key in voller Laenge (vollstaendig) und den letzten 32 Byte (gekuerzt)
+Private Key vollstaendig:303e020100301006072a8648ce3d020106052b8104000a0427302502010104201c251905cde6e4ccd055a00b4dbbb2c68c7edcba6720e1549312824dc050ac2b
+Private Key gekuerzt    :1c251905cde6e4ccd055a00b4dbbb2c68c7edcba6720e1549312824dc050ac2b
+
+Schritt 2: Umwandlung des Private Keys in das Base58- bzw. WIF-Format
+Die einzelnen Schritte folgen dem Artikel https://en.bitcoin.it/wiki/Wallet_import_format
+
+2 - Add a 0x80 byte in front of it for mainnet addresses or 0xef for testnet addresses.
+Step 2 Extended Private Key:EF1c251905cde6e4ccd055a00b4dbbb2c68c7edcba6720e1549312824dc050ac2b
+
+3 - Perform SHA-256 hash on the extended key
+Step 3 SHA256:5435c672a6fd138025ebf2bb89303fb1b5907ec6a56373aafe9ea13915e461fd
+
+4 - Perform SHA-256 hash on result of SHA-256 hash
+Step 4 SHA256:a57cc2c4c65ed688b0c3743dce36865e2559f7d0a5f4caf44b83e9ffe61af49f
+
+5 - Take the first 4 bytes of the second SHA-256 hash, this is the checksum
+Step 5 First 4 Bytes from Step 4:a57cc2c4
+
+6 - Add the 4 checksum bytes from point 5 at the end of the extended key from point 2
+Step 6 complete String:EF1c251905cde6e4ccd055a00b4dbbb2c68c7edcba6720e1549312824dc050ac2ba57cc2c4
+
+7 - Convert the result from a byte string into a base58 string
+Step 7 Base58-String:91oK61hw9ABiKWqfLqWLEV69usmbeGw2gc7RUTp1ZpXhxQ6Ho71
+Step 7 Base58-String:93UgusbzSkSUbUk4N9T7eHdU2H7AsqvpoFY9b5FCwcMGmLkdwkH walletgenerator.net
+
+Zusammenfassung von Schritt 2
+Erzeugte Schluessel sind fuer das Bitcoin Test Network
+Private Key im 32 Byte Format: 1c251905cde6e4ccd055a00b4dbbb2c68c7edcba6720e1549312824dc050ac2b
+Private Key im WIF-Format    : 91oK61hw9ABiKWqfLqWLEV69usmbeGw2gc7RUTp1ZpXhxQ6Ho71
+
+Schritt 3: Oeffentliche Adresse des Wallets
+Die einzelnen Schritte folgen dem Artikel https://www.novixys.com/blog/generate-bitcoin-addresses-java
+
+bcPub: 04031EB765C1C1B2AACE0A8BD7A8C8B356431495E22D3CE10A723B8AF50F8A5CDE1EDF46603E6A8D8FFB6FC5B3B406463F0284330D10AC8D9451D76367F2819001 Length:130
+
+  sha: 14CF1091C72B24CEE4B713530E8DEF3CDA47A12AD2388CEC6CB897ACFE261FA7
+
+r1:c745f75e6e93fd09724dfadf060a994106bfc5f8 Length:20
+
+  rmd: 6FC745F75E6E93FD09724DFADF060A994106BFC5F8
+
+exp:   00C5FAE41AB21FA56CFBAFA3AE7FB5784441D11CEC
+
+  sha: D19679B3377BAA7BB44AFC6FE3F06FBB55E2EC8B21C9E444AFC4A3EF335BB2CA
+
+  sha: CE1F2157FC09420A130706B9CEAB36510D4BA78BDA7E9983CF9BEA589B3759A3
+
+25 Byte Bitcoin Address:6fc745f75e6e93fd09724dfadf060a994106bfc5f8ce1f2157 Länge:25
+
+  adr: mygcaa4xUGAPLdhuYHggWV7tt6RcZqGeTg
+
+Zusammenfassung von Schritt 3
+Erzeugte Schluessel sind fuer das Bitcoin Test Network
+Public Key im 32 Byte Format: 3056301006072a8648ce3d020106052b8104000a03420004031eb765c1c1b2aace0a8bd7a8c8b356431495e22d3ce10a723b8af50f8a5cde1edf46603e6a8d8ffb6fc5b3b406463f0284330d10ac8d9451d76367f2819001
+Public Key im WIF-Format    : mygcaa4xUGAPLdhuYHggWV7tt6RcZqGeTg
+
+* * * Zusammenfassung aller Schluessel und Adressen * * *
+Erzeugte Schluessel sind fuer das Bitcoin Test Network
+EC Private Key im Format    :1c251905cde6e4ccd055a00b4dbbb2c68c7edcba6720e1549312824dc050ac2b
+EC Private Key im WIF-Format:91oK61hw9ABiKWqfLqWLEV69usmbeGw2gc7RUTp1ZpXhxQ6Ho71
+EC Public Key im WIF-Format :mygcaa4xUGAPLdhuYHggWV7tt6RcZqGeTg
+
+Die korrekte Umwandlung fuer das Main Network kann ueber diese beiden Services ueberprueft werden:
+Private Key im WIF-Format         : http://gobittest.appspot.com/PrivateKey
+Oeffentliche Adresse im WIF-Format: http://gobittest.appspot.com/Address
+
